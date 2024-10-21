@@ -1,13 +1,11 @@
 {
-  "name": "ts-template",
-  "description": "ts-template for UbiquityOS plugins.",
-  "ubiquity:listeners": [
-    "issue_comment.created"
-  ],
+  "name": "test-plugin",
+  "description": "this a test plugin",
+  "ubiquity:listeners": ["issue_comment.created"],
   "commands": {
     "command1": {
-      "ubiquity:example": "/command1 argument",
-      "description": "Command 1 with an argument."
+      "ubiquity:example": "/hello",
+      "description": "Posts a comment."
     }
   },
   "configuration": {
@@ -23,8 +21,6 @@
         "type": "string"
       }
     },
-    "required": [
-      "configurableResponse"
-    ]
+    "required": ["configurableResponse"]
   }
 }
