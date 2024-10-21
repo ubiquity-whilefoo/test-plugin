@@ -1,15 +1,5 @@
-import { SupportedEvents, SupportedEventsU } from "./context";
 import { StaticDecode, Type as T } from "@sinclair/typebox";
 import { StandardValidator } from "typebox-validators";
-
-export interface PluginInputs<T extends SupportedEventsU = SupportedEventsU, TU extends SupportedEvents[T] = SupportedEvents[T]> {
-  stateId: string;
-  eventName: T;
-  eventPayload: TU["payload"];
-  settings: PluginSettings;
-  authToken: string;
-  ref: string;
-}
 
 /**
  * This should contain the properties of the bot config

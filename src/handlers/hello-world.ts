@@ -33,7 +33,7 @@ export async function helloWorld(context: Context) {
   logger.debug(`Executing helloWorld:`, { sender, repo, issueNumber, owner });
 
   try {
-    await octokit.issues.createComment({
+    await octokit.rest.issues.createComment({
       owner: payload.repository.owner.login,
       repo: payload.repository.name,
       issue_number: payload.issue.number,
@@ -41,7 +41,7 @@ export async function helloWorld(context: Context) {
     });
     if (customStringsUrl) {
       const response = await fetch(customStringsUrl).then((value) => value.json());
-      await octokit.issues.createComment({
+      await octokit.rest.issues.createComment({
         owner: payload.repository.owner.login,
         repo: payload.repository.name,
         issue_number: payload.issue.number,
