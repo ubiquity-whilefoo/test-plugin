@@ -1,7 +1,9 @@
 {
   "name": "test-plugin",
   "description": "this a test plugin",
-  "ubiquity:listeners": ["issue_comment.created"],
+  "ubiquity:listeners": [
+    "issue_comment.created"
+  ],
   "commands": {
     "command1": {
       "ubiquity:example": "/hello",
@@ -21,6 +23,8 @@
         "type": "string"
       }
     },
-    "required": ["configurableResponse"]
+    "required": [
+      "configurableResponse"
+    ]
   }
 }
