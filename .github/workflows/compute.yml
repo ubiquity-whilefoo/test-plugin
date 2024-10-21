@@ -15,8 +15,8 @@ on:
         description: "Auth Token"
       ref:
         description: "Ref"
-      # signature:
-      #  description: "The kernel signature"
+      signature:
+        description: "The kernel signature"
 
 jobs:
   compute:
@@ -26,6 +26,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || '' }}
 
       - name: setup node
         uses: actions/setup-node@v4
