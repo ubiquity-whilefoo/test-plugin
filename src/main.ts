@@ -4,10 +4,15 @@ import * as github from "@actions/github";
 
 export async function verifySignature(publicKeyPem: string, payload: unknown, signature: string) {
   try {
-    console.log(signature);
-    console.log(JSON.stringify(payload));
+    const inputs = {
+      stateId: payload.stateId,
+      eventName: payload.eventName,
+      eventPayload: payload.eventPayload,
+      settings: payload.settings,
+      authToken: payload.authToken,
+      ref: payload.ref,
+    };
     const pemContents = publicKeyPem.replace("-----BEGIN PUBLIC KEY-----", "").replace("-----END PUBLIC KEY-----", "").trim();
-    console.log(pemContents);
     const binaryDer = Uint8Array.from(atob(pemContents), (c) => c.charCodeAt(0));
 
     const publicKey = await crypto.subtle.importKey(
@@ -22,7 +27,7 @@ export async function verifySignature(publicKeyPem: string, payload: unknown, si
     );
 
     const signatureArray = Uint8Array.from(atob(signature), (c) => c.charCodeAt(0));
-    const dataArray = new TextEncoder().encode(JSON.stringify(payload));
+    const dataArray = new TextEncoder().encode(JSON.stringify(inputs));
 
     return await crypto.subtle.verify("RSASSA-PKCS1-v1_5", publicKey, signatureArray, dataArray);
   } catch (error) {
