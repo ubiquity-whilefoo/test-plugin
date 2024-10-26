@@ -1,22 +1,5 @@
 import { runPlugin } from "./plugin";
 import { createActionsPlugin } from "@ubiquity-os/ubiquity-os-kernel";
-import * as github from "@actions/github";
-import { Octokit } from "@octokit/rest";
-
-const inputs = github.context.payload.inputs;
-const octokit = new Octokit({ auth: inputs.authToken });
-octokit.rest.repos
-  .createDispatchEvent({
-    owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
-    event_type: "return-data-to-ubiquity-os-kernel",
-    client_payload: {
-      state_id: inputs.stateId,
-      output: null,
-    },
-  })
-  .then(console.log)
-  .catch(console.error);
 
 createActionsPlugin(runPlugin, {
   kernelPublicKey: `-----BEGIN PUBLIC KEY-----
