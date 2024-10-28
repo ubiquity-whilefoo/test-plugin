@@ -10,10 +10,10 @@ import { StandardValidator } from "typebox-validators";
  */
 export const pluginSettingsSchema = T.Object(
   {
-    configurableResponse: T.String(),
+    configurableResponse: T.String({ default: "Hello, world!" }),
     customStringsUrl: T.Optional(T.String()),
   },
-  { default: { configurableResponse: "Hello, world!" } }
+  { default: {} }
 );
 
 export const pluginSettingsValidator = new StandardValidator(pluginSettingsSchema);
