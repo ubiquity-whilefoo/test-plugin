@@ -15,8 +15,8 @@ on:
         description: "Auth Token"
       ref:
         description: "Ref"
-      #signature:
-      #  description: "The kernel signature"
+      signature:
+        description: "The kernel signature"
 
 jobs:
   compute:
@@ -36,5 +36,7 @@ jobs:
         run: yarn
 
       - name: execute directive
+        env:
+          PLUGIN_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx tsx ./src/main.ts
         id: plugin-name
