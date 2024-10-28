@@ -1,5 +1,6 @@
 import { runPlugin } from "./plugin";
 import { createPlugin } from "@ubiquity-os/ubiquity-os-kernel";
+import { pluginSettingsSchema } from "./types";
 
 export default createPlugin(
   runPlugin,
@@ -15,5 +16,6 @@ export default createPlugin(
   uwIDAQAB
   -----END PUBLIC KEY-----
   `,
+    settingsSchema: pluginSettingsSchema,
   }
 );

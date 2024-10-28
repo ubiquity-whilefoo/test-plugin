@@ -1,5 +1,6 @@
 import { runPlugin } from "./plugin";
 import { createActionsPlugin } from "@ubiquity-os/ubiquity-os-kernel";
+import { pluginSettingsSchema } from "./types";
 
 createActionsPlugin(runPlugin, {
   kernelPublicKey: `-----BEGIN PUBLIC KEY-----
@@ -12,6 +13,7 @@ a/B/780Kt6QQDNJ8tuEm+vJ1kihYrz5jt47YTifCRrjPnqD57sa0FCObGSMyVl8k
 uwIDAQAB
 -----END PUBLIC KEY-----
 `,
+  settingsSchema: pluginSettingsSchema,
 })
   .then(console.log)
   .catch(console.error);

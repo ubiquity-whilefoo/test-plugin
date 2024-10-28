@@ -1992,11 +1992,6 @@
   resolved "https://registry.yarnpkg.com/@open-draft/until/-/until-2.1.0.tgz#0acf32f470af2ceaf47f095cdecd40d68666efda"
   integrity sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg==
 
-"@sinclair/typebox@0.32.33":
-  version "0.32.33"
-  resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.32.33.tgz#823af450f6f1571a85c12e2b1f2a0b134f61920f"
-  integrity sha512-jM50BfkKA0fwfj0uRRO6asfNfbU0oZipJIb/bL2+BUH/THjuEf2BMiqBOvKfBji5Z9t59NboZQGNfKZbdV50Iw==
-
 "@sinclair/typebox@0.32.35":
   version "0.32.35"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.32.35.tgz#41c04473509478df9895800018a3d3ae7d40fb3c"
