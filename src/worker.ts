@@ -1,53 +1,21 @@
-import manifest from "../manifest.json";
-import { validateAndDecodeSchemas } from "./helpers/validator";
-import { plugin } from "./plugin";
-import { Env } from "./types";
+import { runPlugin } from "./plugin";
+import { createPlugin } from "@ubiquity-os/ubiquity-os-kernel";
+import { pluginSettingsSchema } from "./types";
 
-export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    try {
-      const url = new URL(request.url);
-      if (url.pathname === "/manifest") {
-        if (request.method === "GET") {
-          return new Response(JSON.stringify(manifest), {
-            headers: { "content-type": "application/json" },
-          });
-        } else if (request.method === "POST") {
-          const webhookPayload = await request.json();
-
-          validateAndDecodeSchemas(env, webhookPayload.settings);
-          return new Response(JSON.stringify({ message: "Schema is valid" }), { status: 200, headers: { "content-type": "application/json" } });
-        }
-      }
-      if (request.method !== "POST") {
-        return new Response(JSON.stringify({ error: `Only POST requests are supported.` }), {
-          status: 405,
-          headers: { "content-type": "application/json", Allow: "POST" },
-        });
-      }
-      const contentType = request.headers.get("content-type");
-      if (contentType !== "application/json") {
-        return new Response(JSON.stringify({ error: `Error: ${contentType} is not a valid content type` }), {
-          status: 400,
-          headers: { "content-type": "application/json" },
-        });
-      }
-
-      const webhookPayload = await request.json();
-      const { decodedSettings, decodedEnv } = validateAndDecodeSchemas(env, webhookPayload.settings);
-
-      webhookPayload.env = decodedEnv;
-      webhookPayload.settings = decodedSettings;
-      await plugin(webhookPayload, decodedEnv);
-      return new Response(JSON.stringify("OK"), { status: 200, headers: { "content-type": "application/json" } });
-    } catch (error) {
-      return handleUncaughtError(error);
-    }
-  },
-};
-
-function handleUncaughtError(error: unknown) {
-  console.error(error);
-  const status = 500;
-  return new Response(JSON.stringify({ error }), { status: status, headers: { "content-type": "application/json" } });
-}
+export default createPlugin(
+  runPlugin,
+  { name: "test plugin" },
+  {
+    kernelPublicKey: `-----BEGIN PUBLIC KEY-----
+  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsdKRgFiOZ9xC8B9NGhTh
+  fceon3/ypqCzRoJAXnbI+qdgZfgKtWsQILbrLeRtT2W8/NA9rBBfTIIZRfLfSEAS
+  T8tYCFEWb5xv67RUoN1Jd2iRrbmdT2/gA5J6CBp/PrygqF2o79IpSEC50qOw2aRD
+  Nw4GEonX1NABnPZy+P9WxZFdQotl/s6Cfgh6EDFhmmfU4gpRmHVrG7ztkcYByX6e
+  a/B/780Kt6QQDNJ8tuEm+vJ1kihYrz5jt47YTifCRrjPnqD57sa0FCObGSMyVl8k
+  +sHL5LbY0lhPlI0XZDe6UTnUvrataKd5teR+V6jKzarpKn/513PMUyZwWU3dLiZo
+  uwIDAQAB
+  -----END PUBLIC KEY-----
+  `,
+    settingsSchema: pluginSettingsSchema,
+  }
+);
