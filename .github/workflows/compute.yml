@@ -38,5 +38,7 @@ jobs:
         run: yarn
 
       - name: execute directive
+        env:
+          PLUGIN_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx tsx ./src/main.ts
         id: plugin-name
