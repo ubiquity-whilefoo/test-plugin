@@ -33,6 +33,12 @@ export async function helloWorld(context: Context) {
   logger.debug(`Executing helloWorld:`, { sender, repo, issueNumber, owner });
 
   try {
+    console.log({
+      owner: payload.repository.owner.login,
+      repo: payload.repository.name,
+      issue_number: payload.issue.number,
+      body: configurableResponse,
+    });
     await octokit.rest.issues.createComment({
       owner: payload.repository.owner.login,
       repo: payload.repository.name,
