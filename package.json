@@ -1,6 +1,6 @@
 {
   "name": "plugin-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ubiquibot plugin template repository with TypeScript support.",
   "author": "Ubiquity DAO",
   "license": "MIT",
@@ -36,7 +36,8 @@
     "@sinclair/typebox": "0.32.35",
     "@ubiquity-dao/ubiquibot-logger": "^1.3.0",
     "@ubiquity-os/ubiquity-os-kernel": "2.5.1",
-    "dotenv": "16.4.5"
+    "dotenv": "16.4.5",
+    "typebox-validators": "0.3.5"
   },
   "devDependencies": {
     "@commitlint/cli": "19.3.0",
