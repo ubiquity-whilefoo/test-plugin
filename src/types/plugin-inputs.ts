@@ -1,5 +1,4 @@
 import { StaticDecode, Type as T } from "@sinclair/typebox";
-import { StandardValidator } from "typebox-validators";
 
 /**
  * This should contain the properties of the bot config
@@ -15,7 +14,5 @@ export const pluginSettingsSchema = T.Object(
   },
   { default: {} }
 );
-
-export const pluginSettingsValidator = new StandardValidator(pluginSettingsSchema);
 
 export type PluginSettings = StaticDecode<typeof pluginSettingsSchema>;
