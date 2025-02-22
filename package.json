@@ -1,6 +1,6 @@
 {
   "name": "plugin-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ubiquibot plugin template repository with TypeScript support.",
   "author": "Ubiquity DAO",
   "license": "MIT",
